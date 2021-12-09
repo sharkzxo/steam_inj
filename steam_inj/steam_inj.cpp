@@ -43,8 +43,6 @@ int main()
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
 
-    std::puts("1");
-
     // check if we created copy in the previous time & delete (avoid crash)
     if (std::filesystem::exists((steam_path + copy))) {
         std::printf("[~] copy file exists [%s] \n", copy.c_str());
