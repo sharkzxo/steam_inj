@@ -13,13 +13,25 @@
 // the cheat get injected so that's my way how to avoid this issue
 // if you have some problems with compile please use (release x86)
 
-// place this application into the steam folder and name your cheat as "cheat.dll" (default)
-
 int main()
 {
-    static std::string original = "crashhandler.dll";
-    static std::string copy = "crashhandler_original.dll";
-    static std::string cheat = "cheat.dll";
+    HKEY rnd;
+    char steam_path[MAX_PATH];
+    RegOpenKeyEx(HKEY_CURRENT_USER, "Software\\Valve\\Steam", 0, KEY_READ, &rnd);
+    DWORD pathBytes = sizeof(steam_path);
+    RegQueryValueEx(rnd, "SteamPath", nullptr, nullptr, (BYTE*)steam_path, &pathBytes);
+    RegCloseKey(rnd);
+
+    DWORD pathChars = pathBytes / sizeof(wchar_t);
+    for (DWORD i = 0; i < pathChars; ++i) {
+        if (steam_path[i] == L'/') {
+            steam_path[i] = L'\\';
+        }
+    }
+
+    static std::string original("\\crashhandler.dll");
+    static std::string copy("\\crashhandler_original.dll");
+    static std::string cheat("cheat.dll");
 
     auto process = find_proc("csgo.exe");
     auto module = find_module("crashhandler.dll");
@@ -31,25 +43,28 @@ int main()
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
 
+    std::puts("1");
+
     // check if we created copy in the previous time & delete (avoid crash)
-    if (std::filesystem::exists(copy.c_str())) {
+    if (std::filesystem::exists((steam_path + copy))) {
         std::printf("[~] copy file exists [%s] \n", copy.c_str());
         std::remove(copy.c_str());
     }
 
     // create copy of crashhandler.dll
-    if (std::rename(original.c_str(), copy.c_str()))
-        std::printf("[+] file renamed [%s] \n", copy.c_str());
+    std::filesystem::rename((steam_path + original), (steam_path + copy));
+
+    std::printf("[+] file renamed [%s] \n", copy.c_str());
 
     // check if our dll exist 
     if (std::filesystem::exists(cheat.c_str()))
         std::printf("[+] our dll found [%s] \n", cheat.c_str());
 
-    // lets rename our dll to original
-    std::filesystem::rename(cheat.c_str(), original.c_str());
+    // lets copy our dll to csgo file and rename
+    std::filesystem::copy_file(cheat, (steam_path + original));
 
     // check if the our dll is placed as original
-    if (std::filesystem::exists(original.c_str()))
+    if (std::filesystem::exists((steam_path + original)))
         std::printf("[+] our dll is placed as original [%s] \n", original.c_str());
 
     // loop for process
@@ -57,7 +72,7 @@ int main()
         process = find_proc("csgo.exe");
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
-    
+
     // let us know if the csgo was found
     std::printf("[+] the target process was found \n");
 
@@ -70,11 +85,13 @@ int main()
     // let us know if the dll was found in the target process
     std::printf("[+] our dll found in target process as [%s] \n", original.c_str());
 
-    // lets rename our fake original to cheat
-    std::filesystem::rename(original, cheat);
+    // lets rename the fake original to cheat
+    std::filesystem::rename((steam_path + original), (steam_path + cheat));
 
     // lets rename the copy as the original
-    std::filesystem::rename(copy, original);
+    std::filesystem::rename((steam_path + copy), (steam_path + original));
+
+    std::printf("\n[!] successfull \n");
 
     // would delete this its just cool to see messages
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));
