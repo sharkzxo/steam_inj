@@ -18,7 +18,7 @@ DWORD find_proc(LPCTSTR name)
 
         if (Process32First(snapshot, &pe32)) {
             do {
-                std::string_view sName = pe32.szExeFile;
+                std::string_view sName(pe32.szExeFile);
 
                 if (!lstrcmpiA(sName.data(), name)) {
                     pid = pe32.th32ProcessID;
