@@ -1,6 +1,6 @@
 #include "tool.hpp"
 
-// https://github.com/blxckshark/ (2021)
+// https://github.com/sharkzxo/ (2021)
 // 
 // we will use this as free undetected injector by valve (at this moment)
 // this would be patched in the future actually it works well
