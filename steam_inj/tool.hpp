@@ -21,7 +21,7 @@ DWORD find_proc(LPCTSTR name)
                 std::string sName = pe32.szExeFile;
                 std::transform(sName.begin(), sName.end(), sName.begin(), ::tolower);
 
-                if (!lstrcmp(sName.c_str(), name)) {
+                if (!lstrcmp(sName.data(), name)) {
                     pid = pe32.th32ProcessID;
                     break;
                 }
@@ -36,15 +36,18 @@ DWORD find_proc(LPCTSTR name)
 
 DWORD find_module(LPCTSTR name)
 {
-    HANDLE _module = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, find_proc("csgo.exe"));
-    MODULEENTRY32 _entry;
-    _entry.dwSize = sizeof(_entry);
+    HANDLE _entry = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, find_proc("csgo.exe"));
+    MODULEENTRY32 _module;
+    _module.dwSize = sizeof(MODULEENTRY32);
+    Module32First(_entry, &_module);
+    if (_entry == INVALID_HANDLE_VALUE)
+        return 0;
     do
-        if (!strcmp(_entry.szModule, name))
-        {
-            CloseHandle(_module);
-            return (DWORD)_entry.modBaseAddr;
-        }
-    while (Module32Next(_module, &_entry));
-    return 0;
+    {
+        if (!strcmp(_module.szModule, name))
+            break;
+    } while (Module32Next(_entry, &_module));
+    CloseHandle(_entry);
+
+    return (DWORD)_module.modBaseAddr;
 }
