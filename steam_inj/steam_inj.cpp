@@ -11,6 +11,7 @@
 // at this momnent we just want to avoid some issues with injecting
 // thats mean if we keep our fake original then every time when u open the game
 // the cheat get injected so that's my way how to avoid this issue
+// and also to dont re-download the original crashhandler.dll (steam app do itself)
 // if you have some problems with compile please use (release x86)
 
 int main()
