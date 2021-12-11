@@ -48,16 +48,16 @@ int main()
     // let us know the file was renamed
     std::printf("[+] file renamed [%s] \n", copy.data());
 
-    // check if our dll exist 
+    // check if dll exist 
     if (std::filesystem::exists(cheat.data()))
-        std::printf("[+] our dll found [%s] \n", cheat.data());
+        std::printf("[+] dll found [%s] \n", cheat.data());
 
-    // lets copy our dll to csgo file and rename
+    // lets copy dll to csgo file and rename
     std::filesystem::copy_file(cheat, (steam_path + original));
 
-    // check if the our dll is placed as original
+    // check if the dll is placed as original
     if (std::filesystem::exists((steam_path + original)))
-        std::printf("[+] our dll is placed as original [%s] \n", original.data());
+        std::printf("[+] dll is placed as original [%s] \n", original.data());
 
     // loop for process
     while (!process) {
@@ -75,10 +75,10 @@ int main()
     }
 
     // let us know if the dll was found in the target process
-    std::printf("[+] our dll found in target process as [%s] [%lu] \n", original.data(), module_crashhandler);
+    std::printf("[+] dll found in target process as [%s] [%lu] \n", original.data(), module_crashhandler);
 
     // pause warning message
-    std::printf("\n[+] our app is paused for 10 seconds \n\n");
+    std::printf("\n[+] app is paused for 10 seconds \n\n");
 
     // pause
     Sleep(10000);
@@ -93,7 +93,7 @@ int main()
     std::filesystem::rename((steam_path + copy), (steam_path + original));
 
     // let us know if the dll was found in the target process
-    std::printf("[+] our changes was removed now backup the original [%s] \n", original.data());
+    std::printf("[+] changes was removed now backup the original [%s] \n", original.data());
 
     std::printf("[~] github.com/sharkzxo/\n");
 
