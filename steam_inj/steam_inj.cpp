@@ -1,3 +1,5 @@
+/* github.com/sharkzxo/ */
+
 #include "tool.hpp"
 
 int main()
