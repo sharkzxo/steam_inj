@@ -92,7 +92,7 @@ int main()
     // lets rename the copy as the original
     std::filesystem::rename((steam_path + copy), (steam_path + original));
 
-    // let us know if the dll was found in the target process
+    // just message if everything was backup'd
     std::printf("[+] changes was removed now backup the original [%s] \n", original.data());
 
     std::printf("[~] github.com/sharkzxo/\n");
