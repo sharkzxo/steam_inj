@@ -42,7 +42,7 @@ int main()
         std::remove(copy.data());
     }
 
-    // create copy of crashhandler.dll
+    // rename original crashhandler.dll to copy
     std::filesystem::rename((steam_path + original), (steam_path + copy));
 
     // let us know the file was renamed
