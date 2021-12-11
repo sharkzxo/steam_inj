@@ -81,7 +81,7 @@ int main()
     Sleep(10000);
 
     // let us know if the dll was found in the target process
-    std::printf("[+] our dll found in target process as [%s] \n", original.data());
+    std::printf("[+] our dll found in target process as [%s] [%lu] \n", original.data(), module_crashhandler);
 
     // let us know if the dll is active in the target process
     std::printf("\n[!] software is active in the [%lu] process \n", process);
