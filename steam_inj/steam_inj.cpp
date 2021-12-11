@@ -24,7 +24,7 @@ int main()
 
     static const std::string& original("\\crashhandler.dll");
     static const std::string& copy("\\crashhandler_original.dll");
-    static const std::string& cheat("cheat.dll");
+    static const std::string& cheat("\\cheat.dll");
 
     auto process = find_proc("csgo.exe");
     auto module_crashhandler = find_module("crashhandler.dll");
