@@ -4,7 +4,7 @@
 
 int main()
 {
-    std::printf("[steam_inj] started.. \n\n");
+    std::printf("[steam_inj] app started.. \n\n");
 
     HKEY rnd;
     char steam_path[MAX_PATH];
@@ -43,6 +43,7 @@ int main()
     // create copy of crashhandler.dll
     std::filesystem::rename((steam_path + original), (steam_path + copy));
 
+    // let us know the file was renamed
     std::printf("[+] file renamed [%s] \n", copy.data());
 
     // check if our dll exist 
@@ -71,6 +72,9 @@ int main()
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
+    // pause warning message
+    std::printf("\n[+] our app is paused for 10 seconds \n\n");
+
     // pause
     std::this_thread::sleep_for(std::chrono::seconds(10));
 
@@ -92,7 +96,7 @@ int main()
     std::printf("[~] github.com/sharkzxo/\n");
 
     // would delete this its just cool to see messages
-    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(2500));
 
     // exit the process if we everything done
     ExitProcess(0);
