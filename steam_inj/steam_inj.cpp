@@ -70,8 +70,9 @@ int main()
         module = find_module("crashhandler.dll");
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
-
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    
+    // pause 
+    std::this_thread::sleep_for(std::chrono::seconds(10));
 
     // let us know if the dll was found in the target process
     std::printf("[+] our dll found in target process as [%s] \n", original.data());
