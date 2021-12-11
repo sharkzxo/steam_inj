@@ -23,3 +23,7 @@
 * thats mean if the .dll (cheat) is detected but this tool doesnt do anything with the csgo memory
 * if someone just get banned its not my bad your cheat was just detected 
 * how I said above this method is undetected since CS:S was released 
+
+## Preview
+
+![](https://i.imgur.com/sYUnTaP.png)
