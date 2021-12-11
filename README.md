@@ -17,3 +17,9 @@
 * thats mean if we keep our fake original then every time when u open the game
 * the cheat get injected so that's my way how to avoid this issue
 * if you have some problems with compile please use (release x86)
+
+## Risk 
+* there isnt any risk you can just get banned for the cheat (.dll) 
+* thats mean if the .dll (cheat) is detected but this tool doesnt do anything with the csgo memory
+* if someone just get banned its not my bad your cheat was just detected 
+* how I said above this method is undetected since CS:S was released 
