@@ -4,8 +4,10 @@
 
 int main()
 {
+    // first message apper in the console
     std::printf("[steam_inj] app started.. \n\n");
 
+    // get steam path (ex. C:\\Program Files (x86)\\Steam\\)
     HKEY rnd;
     char steam_path[MAX_PATH];
     RegOpenKeyEx(HKEY_CURRENT_USER, "Software\\Valve\\Steam", 0, KEY_READ, &rnd);
@@ -25,7 +27,7 @@ int main()
     static const std::string& cheat("cheat.dll");
 
     auto process = find_proc("csgo.exe");
-    auto module = find_module("crashhandler.dll");
+    auto module_crashhandler = find_module("crashhandler.dll");
 
     // check if the process running before doing same changes then ask for exit
     while (process) {
@@ -67,8 +69,8 @@ int main()
     std::printf("[+] the target process was found \n");
 
     // loop for module
-    while (!module) {
-        module = find_module("crashhandler.dll");
+    while (!module_crashhandler) {
+        module_crashhandler = find_module("crashhandler.dll");
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
