@@ -74,17 +74,17 @@ int main()
         Sleep(100);
     }
 
+    // let us know if the dll was found in the target process
+    std::printf("[+] our dll found in target process as [%s] [%lu] \n", original.data(), module_crashhandler);
+
     // pause warning message
     std::printf("\n[+] our app is paused for 10 seconds \n\n");
 
     // pause
     Sleep(10000);
 
-    // let us know if the dll was found in the target process
-    std::printf("[+] our dll found in target process as [%s] [%lu] \n", original.data(), module_crashhandler);
-
     // let us know if the dll is active in the target process
-    std::printf("\n[!] software is active in the [%lu] process \n", process);
+    std::printf("\n[!] software is active in the [%lu] process [%lu] module \n", process, module_crashhandler);
 
     // lets rename the fake original to cheat
     std::filesystem::rename((steam_path + original), (steam_path + cheat));
