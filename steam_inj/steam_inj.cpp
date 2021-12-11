@@ -4,7 +4,7 @@
 
 int main()
 {
-    // first message apper in the console
+    // first message appear in the console
     std::printf("[steam_inj] app started.. \n\n");
 
     // get steam path (ex. C:\\Program Files (x86)\\Steam\\)
