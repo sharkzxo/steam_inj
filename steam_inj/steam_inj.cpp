@@ -4,7 +4,7 @@
 
 int main()
 {
-    std::printf("[steam_inj] started.. \n");
+    std::printf("[steam_inj] started.. \n\n");
 
     HKEY rnd;
     char steam_path[MAX_PATH];
@@ -70,8 +70,8 @@ int main()
         module = find_module("crashhandler.dll");
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
-    
-    // pause 
+
+    // pause
     std::this_thread::sleep_for(std::chrono::seconds(10));
 
     // let us know if the dll was found in the target process
