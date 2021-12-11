@@ -1,19 +1,5 @@
 #include "tool.hpp"
 
-// https://github.com/sharkzxo/ (2021)
-// 
-// we will use this as free undetected injector by valve (at this moment)
-// this would be patched in the future actually it works well
-// this idea was done through the public education (its up from 2k18 +-)
-// but this tool is automatized and doesnt has any issues
-// 
-// why do I replacing our fake original back to the right original? 
-// at this momnent we just want to avoid some issues with injecting
-// thats mean if we keep our fake original then every time when u open the game
-// the cheat get injected so that's my way how to avoid this issue
-// and also to dont re-download the original crashhandler.dll (steam app do itself)
-// if you have some problems with compile please use (release x86)
-
 int main()
 {
     std::printf("[steam_inj] started.. \n");
@@ -86,13 +72,19 @@ int main()
     // let us know if the dll was found in the target process
     std::printf("[+] our dll found in target process as [%s] \n", original.data());
 
+    // let us know if the dll is active in the target process
+    std::printf("\n[!] software is active in the [%lu] process \n", process);
+
     // lets rename the fake original to cheat
     std::filesystem::rename((steam_path + original), (steam_path + cheat));
 
     // lets rename the copy as the original
     std::filesystem::rename((steam_path + copy), (steam_path + original));
 
-    std::printf("\n[!] successfull \n");
+    // let us know if the dll was found in the target process
+    std::printf("[+] our changes was removed now backup the original [%s] \n", original.data());
+
+    std::printf("[~] github.com/sharkzxo/\n");
 
     // would delete this its just cool to see messages
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));
