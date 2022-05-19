@@ -33,7 +33,7 @@ int main()
     while (process) {
         process = find_proc("csgo.exe");
         std::printf("[~] please close csgo.exe..");
-        Sleep(100);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
     // check if we created copy in the previous time & delete (avoid crash)
@@ -62,7 +62,7 @@ int main()
     // loop for process
     while (!process) {
         process = find_proc("csgo.exe");
-        Sleep(100);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
     // let us know if the csgo was found
@@ -71,7 +71,7 @@ int main()
     // loop for module
     while (!module_crashhandler) {
         module_crashhandler = find_module("crashhandler.dll");
-        Sleep(100);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
     // let us know if the dll was found in the target process
@@ -81,7 +81,7 @@ int main()
     std::printf("\n[+] app is paused for 10 seconds \n\n");
 
     // pause
-    Sleep(10000);
+    std::this_thread::sleep_for(std::chrono::seconds(10));
 
     // let us know if the dll is active in the target process
     std::printf("\n[!] software is active in the [%lu] process [%lu] module \n", process, module_crashhandler);
@@ -98,8 +98,8 @@ int main()
     std::printf("[~] github.com/sharkzxo/\n");
 
     // would delete this its just cool to see messages
-    Sleep(2500);
+    std::this_thread::sleep_for(std::chrono::seconds(2));
 
     // exit the process if we everything done
-    ExitProcess(0);
+    throw 42;
 }
